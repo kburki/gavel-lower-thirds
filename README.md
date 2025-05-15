@@ -303,5 +303,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) for text recognition
 - [OpenCV](https://opencv.org/) for image processing
-- [Gavel Alaska](https://www.360north.org/gavel-alaska/) for providing legislative video coverage
+- [Gavel Alaska](https://www.ktoo.org/gavel/) for providing legislative video coverage
 - [Studio Network Solutions](https://www.studionetworksolutions.com/) for EVO shared storage
