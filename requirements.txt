@@ -1,0 +1,5 @@
+# Required dependencies
+opencv-python>=4.5.0
+pytesseract>=0.3.8
+numpy>=1.19.0
+requests>=2.25.0

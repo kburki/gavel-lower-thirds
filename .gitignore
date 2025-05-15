@@ -1,0 +1,20 @@
+# Python-specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+ENV/
+
+# Project-specific
+config/config.json
+output/
+temp/
+*.log
+debug_frames/
+lower_thirds.db
+
+# OS-specific
+.DS_Store
+.vscode/
