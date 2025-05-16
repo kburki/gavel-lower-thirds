@@ -1,5 +1,5 @@
 #!/bin/bash
-# Convenient script to run the lower thirds extractor with common options
+# Script to run the lower thirds extractor on a single video file
 
 # Get the directory of this script
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
@@ -16,19 +16,19 @@ DB=false
 # Display help message
 function show_help {
     echo "Usage: $0 [options] <video_path>"
-    echo "Extract lower thirds from Gavel Alaska video files"
+    echo "Extract lower thirds from a video file"
     echo ""
     echo "Options:"
     echo "  -o, --output DIR     Output directory (default: ./output)"
-    echo "  -c, --config FILE    Config file path (default: ./config.json)"
+    echo "  -c, --config FILE    Config file path (default: ./config/config.json)"
     echo "  -u, --upload         Upload metadata to EVO"
-    echo "  -d, --debug          Enable debug mode"
+    echo "  -d, --debug          Enable debug mode with image saves"
     echo "  --csv                Export data to CSV"
     echo "  --db                 Store data in SQLite database"
     echo "  -h, --help           Show this help message"
     echo ""
     echo "Example:"
-    echo "  $0 --upload --csv videos/senate_session.mp4"
+    echo "  $0 --debug --csv sample.mp4"
     exit 0
 }
 
@@ -63,7 +63,13 @@ while [[ $# -gt 0 ]]; do
             show_help
             ;;
         *)
-            VIDEO_PATH="$1"
+            # If the argument doesn't start with a dash, treat it as the video path
+            if [[ "$1" != -* ]]; then
+                VIDEO_PATH="$1"
+            else
+                echo "Error: Unknown option $1"
+                show_help
+            fi
             shift
             ;;
     esac
@@ -77,12 +83,13 @@ fi
 
 # Check if video path exists
 if [ ! -e "$VIDEO_PATH" ]; then
-    echo "Error: Video path does not exist: $VIDEO_PATH"
+    echo "Error: Video file does not exist: $VIDEO_PATH"
     exit 1
 fi
 
 # Create output directory if it doesn't exist
-mkdir -p "$OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR/json"
+mkdir -p "$OUTPUT_DIR/csv"
 
 # Activate virtual environment if it exists
 if [ -d "$SCRIPT_DIR/venv" ]; then
@@ -111,7 +118,7 @@ if [ "$DB" = true ]; then
 fi
 
 # Run the extractor
-echo "Running: python $SCRIPT_DIR/lower_thirds_extractor.py $ARGS \"$VIDEO_PATH\""
+echo "Running Lower Thirds Extractor on $VIDEO_PATH..."
 eval "python $SCRIPT_DIR/lower_thirds_extractor.py $ARGS \"$VIDEO_PATH\""
 
 # Deactivate virtual environment if it was activated

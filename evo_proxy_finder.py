@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-SNS EVO Proxy Finder
+EVO Proxy Finder for Gavel Alaska
 
 This script scans the specified SNS EVO shares for video files matching the Gavel Alaska
 naming patterns, retrieves their proxy URLs, and processes them to extract lower thirds.
 
 Usage:
-    python evo_proxy_finder.py --config config.json [--process] [--list-only]
+    python evo_proxy_finder.py --config config.json [--process] [--list-only] [--single] [--limit N]
 """
 
 import os
@@ -58,7 +58,7 @@ class EVOProxyFinder:
         default_paths = [
             'config/config.json',
             os.path.join(os.path.dirname(__file__), 'config/config.json'),
-            os.path.join(os.path.expanduser('~'), '.lower_thirds_extractor', 'config/config.json')
+            os.path.join(os.path.expanduser('~'), '.lower_thirds_extractor', 'config.json')
         ]
         
         for path in default_paths:

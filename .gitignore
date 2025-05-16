@@ -11,6 +11,9 @@ ENV/
 config/config.json
 output/
 temp/
+video/
+*.mp4
+*.backup
 *.log
 debug_frames/
 lower_thirds.db

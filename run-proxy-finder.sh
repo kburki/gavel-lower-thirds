@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run the EVO proxy finder to scan shares and process Gavel Alaska videos
+# Run the proxy finder to scan shares and process Gavel Alaska videos
 
 # Get the directory of this script
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
@@ -18,7 +18,7 @@ function show_help {
     echo "Scan SNS EVO shares for Gavel Alaska videos and process them"
     echo ""
     echo "Options:"
-    echo "  -c, --config FILE    Config file path (default: ./config.json)"
+    echo "  -c, --config FILE    Config file path (default: ./config/config.json)"
     echo "  -p, --process        Process the found files"
     echo "  -l, --list-only      Only list matching files without processing"
     echo "  -n, --limit N        Limit processing to N files (for testing)"
@@ -99,6 +99,11 @@ fi
 if [ "$VERBOSE" = true ]; then
     ARGS="$ARGS --verbose"
 fi
+
+# Create necessary directories
+mkdir -p "$SCRIPT_DIR/output/json"
+mkdir -p "$SCRIPT_DIR/output/csv"
+mkdir -p "$SCRIPT_DIR/temp"
 
 # Run the proxy finder
 echo "Running EVO proxy finder..."
