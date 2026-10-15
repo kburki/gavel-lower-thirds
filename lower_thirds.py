@@ -11,6 +11,7 @@ import numpy as np
 import pytesseract
 import re
 import os
+os.environ.setdefault("OMP_THREAD_LIMIT", "1")  # Tesseract is ~100x slower multithreaded on this machine
 import logging
 from datetime import timedelta
 
